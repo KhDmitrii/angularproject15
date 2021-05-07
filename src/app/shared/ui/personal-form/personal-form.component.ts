@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Personal } from '../../interfaces/personal.interface';
 
@@ -8,7 +8,6 @@ import { Personal } from '../../interfaces/personal.interface';
   styleUrls: ['./personal-form.component.css'],
 })
 export class PersonalFormComponent implements OnInit {
-  @Input() personal!: Personal;
   @Output() onSave = new EventEmitter<Personal>();
 
   personalForm!: FormGroup;
@@ -24,10 +23,6 @@ export class PersonalFormComponent implements OnInit {
     };
 
     this.personalForm = this.fb.group(controls);
-
-    if (this.personal) {
-      this.personalForm.patchValue(this.personal);
-    }
   }
 
   save() {
