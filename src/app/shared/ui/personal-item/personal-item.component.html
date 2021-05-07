@@ -1,0 +1,74 @@
+<ng-container *ngIf="!editMode; else elseTemplate">
+  <div class="row">
+    <div class="col-12">Имя: {{ personal.name }}</div>
+    <div class="col-12">Фамилия: {{ personal.surname }}</div>
+    <div class="col-12">Отчество: {{ personal.patronymic }}</div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button type="button" class="btn btn-primary mr-2" (click)="editMode = true">
+        Редактировать
+      </button>
+
+      <button type="button" class="btn btn-danger" (click)="delete()">
+        Удалить
+      </button>
+    </div>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <form [formGroup]="personalForm" (ngSubmit)="save()">
+    <div class="row">
+      <div class="col-12">
+        Имя:
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Имя"
+          formControlName="name"
+          [ngClass]="{
+            'has-error':
+              personalForm.get('name')?.invalid &&
+              personalForm.get('name')?.touched
+          }"
+        />
+      </div>
+      <div class="col-12">
+        Фамилия:
+        <input
+          type="text"
+          class="form-control"
+          id="surname"
+          placeholder="Фамилия"
+          formControlName="surname"
+          [ngClass]="{
+            'has-error':
+              personalForm.get('surname')?.invalid &&
+              personalForm.get('surname')?.touched
+          }"
+        />
+      </div>
+      <div class="col-12">
+        Отчество:
+        <input
+          type="text"
+          class="form-control"
+          id="patronymic"
+          placeholder="Отчество"
+          formControlName="patronymic"
+          [ngClass]="{
+            'has-error':
+              personalForm.get('patronymic')?.invalid &&
+              personalForm.get('patronymic')?.touched
+          }"
+        />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
